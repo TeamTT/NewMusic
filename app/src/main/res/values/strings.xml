@@ -1,3 +1,25 @@
 <resources>
-    <string name="app_name">NewMusic</string>
+    <string name="app_name">RoomNews</string>
+
+    <string name="main_radiobtn_news_name">MV</string>
+    <string name="main_radiobtn_evaluating_name">电台</string>
+    <string name="main_radiobtn_picture_name">本地</string>
+
+
+    <!-- 字体名称 -->
+    <string-array name="font_size_name">
+        <item>小号</item>
+        <item>中号</item>
+        <item>大号</item>
+        <item>特大号</item>
+    </string-array>
+
+    <!-- 字体字号 -->
+    <integer-array name="font_size_array">
+        <item>30</item>
+        <item>50</item>
+        <item>70</item>
+        <item>90</item>
+    </integer-array>
+
 </resources>
