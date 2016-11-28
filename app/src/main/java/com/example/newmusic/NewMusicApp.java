@@ -7,6 +7,8 @@ import com.example.newmusic.contants.HttpParams;
 import com.example.newmusic.utils.NetWorkUtil;
 import com.zhy.http.okhttp.OkHttpUtils;
 
+import org.xutils.x;
+
 import java.io.IOException;
 
 import okhttp3.Cache;
@@ -24,7 +26,8 @@ public class NewMusicApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-
+        x.Ext.setDebug(true);
+        x.Ext.init(this);
 
         context = this;
         // 初始化OkHttpUtil
