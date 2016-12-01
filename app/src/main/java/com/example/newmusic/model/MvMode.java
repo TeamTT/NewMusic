@@ -12,6 +12,8 @@ public class MvMode implements Parcelable{
     private  String title;
     private  String views;
     private  String regtime;
+    private  String id;
+
 
     protected MvMode(Parcel in) {
         image = in.readString();
@@ -19,6 +21,7 @@ public class MvMode implements Parcelable{
         title = in.readString();
         views = in.readString();
         regtime = in.readString();
+        id = in.readString();
     }
 
     public static final Creator<MvMode> CREATOR = new Creator<MvMode>() {
@@ -32,6 +35,14 @@ public class MvMode implements Parcelable{
             return new MvMode[size];
         }
     };
+
+    public String getId() {
+        return id;
+    }
+
+    public void setId(String id) {
+        this.id = id;
+    }
 
     public String getImage() {
         return image;
@@ -80,10 +91,14 @@ public class MvMode implements Parcelable{
 
     @Override
     public void writeToParcel(Parcel dest, int flags) {
+
         dest.writeString(image);
         dest.writeString(url);
         dest.writeString(title);
         dest.writeString(views);
         dest.writeString(regtime);
+        dest.writeString(id);
     }
+
+
 }

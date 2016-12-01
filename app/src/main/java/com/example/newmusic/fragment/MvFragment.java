@@ -11,7 +11,9 @@ import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
 
+import com.example.newmusic.LoginActivity;
 import com.example.newmusic.MvActivity;
+import com.example.newmusic.MvSearchActivity;
 import com.example.newmusic.R;
 import com.example.newmusic.adapters.MvAdapter;
 import com.example.newmusic.model.MvList;
@@ -121,8 +123,12 @@ public class MvFragment extends Fragment implements PullToRefreshBase.OnRefreshL
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.teach_mv_search:
+                Intent intent1 = new Intent(getContext(), MvSearchActivity.class);
+                startActivity(intent1);
                 break;
             case R.id.teach_mv_login:
+                Intent intent = new Intent(getContext(), LoginActivity.class);
+                startActivity(intent);
                 break;
         }
     }

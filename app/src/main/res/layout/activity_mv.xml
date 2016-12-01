@@ -1,12 +1,13 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context="com.example.newmusic.MvActivity">
 
     <RelativeLayout
+        android:id="@+id/teach_mv_rl"
         android:layout_width="match_parent"
         android:layout_height="@dimen/mv_header_height"
         android:background="#0c0343">
@@ -29,18 +30,71 @@
             android:textSize="@dimen/mv_header_title_size" />
     </RelativeLayout>
 
+
     <VideoView
         android:id="@+id/teach_mv_videoview"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/mv_height" />
+        android:layout_height="@dimen/mv_height"
+        android:layout_below="@id/teach_mv_rl" />
+
+    <LinearLayout
+        android:id="@+id/teach_media_controller"
+        android:layout_width="match_parent"
+        android:layout_height="45dp"
+        android:layout_alignBottom="@id/teach_mv_videoview"
+        android:layout_gravity="bottom"
+        android:background="#bbbbbbbb"
+        android:gravity="center_vertical"
+        android:orientation="horizontal">
+
+        <CheckBox
+            android:id="@+id/teach_media_play"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:button="@null"
+            android:drawableRight="@drawable/play" />
+
+        <TextView
+            android:id="@+id/teach_media_current_progress"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="00:00" />
+
+        <SeekBar
+            android:id="@+id/teach_media_seek_progress"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_weight="1" />
+
+        <TextView
+            android:id="@+id/teach_media_total_progress"
+            android:layout_width="50dp"
+            android:layout_height="match_parent"
+            android:gravity="center"
+            android:text="00:00" />
+
+        <CheckBox
+            android:id="@+id/teach_media_full_screen"
+            android:layout_width="35dp"
+            android:layout_height="35dp"
+            android:button="@null"
+            android:drawableLeft="@drawable/screen" />
+
+    </LinearLayout>
+
 
     <android.support.design.widget.TabLayout
         android:id="@+id/teach_mv_tablayout"
         android:layout_width="match_parent"
-        android:layout_height="@dimen/mv_header_height" />
+        android:layout_height="@dimen/mv_header_height"
+        android:layout_below="@id/teach_mv_videoview" />
 
     <android.support.v4.view.ViewPager
         android:id="@+id/teach_mv_viewpage"
         android:layout_width="match_parent"
+        android:layout_below="@id/teach_mv_tablayout"
         android:layout_height="match_parent" />
-</LinearLayout>
+</RelativeLayout>
+
+

@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <ImageView
+        android:id="@+id/teach_location_mv_item_image"
+        android:layout_width="@dimen/introduce_height"
+        android:layout_height="@dimen/introduce_height"
+        android:layout_margin="10dp"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/teach_location_mv_item_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="10dp"
+        android:layout_toRightOf="@id/teach_location_mv_item_image"
+        android:lines="2"
+        android:text="content"
+        android:textStyle="bold" />
+
+    <ProgressBar
+        android:id="@+id/teach_location_mv_item_progressBar"
+        style="?android:attr/progressBarStyleHorizontal"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignStart="@+id/teach_location_mv_item_content"
+        android:layout_below="@+id/teach_location_mv_item_content"
+        android:max="100"
+        android:background="#999999" />
+
+</RelativeLayout>

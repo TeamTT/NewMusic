@@ -1,13 +1,40 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     android:layout_width="match_parent"
-    android:layout_height="match_parent"
-    android:orientation="vertical">
+    android:layout_height="match_parent">
 
-    <TextView
+    <com.handmark.pulltorefresh.library.PullToRefreshListView
+        android:id="@+id/teach_comment_pull_to_refresh"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="comment" />
+        android:layout_marginBottom="60dp" />
 
-</LinearLayout>
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="60dp"
+        android:layout_alignParentBottom="true"
+        android:orientation="horizontal">
+
+        <EditText
+            android:id="@+id/teach_mv_comment_et_content"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_margin="8dp"
+            android:layout_weight="4"
+            android:padding="5dp"
+            android:background="#e6dcdc"
+            android:hint="写点什么吧" />
+
+        <TextView
+            android:id="@+id/teach_mv_comment_deliver"
+            android:layout_width="wrap_content"
+            android:layout_height="match_parent"
+            android:layout_weight="1"
+            android:gravity="center"
+            android:background="#1fbf9a"
+            android:textColor="#fff"
+            android:layout_margin="8dp"
+            android:text="发表" />
+    </LinearLayout>
+
+</RelativeLayout>

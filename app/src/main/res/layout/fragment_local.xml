@@ -4,10 +4,41 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
-    <TextView
+    <RelativeLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent"
-        android:gravity="center"
-        android:text="本地" />
+        android:layout_height="@dimen/mv_header_height"
+        android:background="#0c0343">
+
+        <TextView
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_centerInParent="true"
+            android:layout_gravity="center"
+            android:text="本地"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/mv_header_title_size" />
+
+        <TextView
+            android:id="@+id/teach_location_edit"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_alignParentRight="true"
+            android:layout_centerVertical="true"
+            android:layout_marginRight="8dp"
+            android:text="编辑"
+            android:textColor="#ffffff"
+            android:textSize="@dimen/mv_header_title_size" />
+
+    </RelativeLayout>
+
+    <android.support.design.widget.TabLayout
+        android:id="@+id/teach_location_tablayout"
+        android:layout_width="match_parent"
+        android:layout_height="@dimen/mv_header_height" />
+
+    <android.support.v4.view.ViewPager
+        android:id="@+id/teach_location_viewpager"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent" />
 
 </LinearLayout>

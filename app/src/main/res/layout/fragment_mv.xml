@@ -4,6 +4,7 @@
     android:layout_height="match_parent"
     android:orientation="vertical">
 
+
     <RelativeLayout
         android:layout_width="match_parent"
         android:layout_height="@dimen/mv_header_height"
@@ -35,7 +36,6 @@
             android:background="@mipmap/login1" />
 
     </RelativeLayout>
-
     <com.handmark.pulltorefresh.library.PullToRefreshListView
         android:id="@+id/teach_mv_pull_to_refresh_lv"
         android:layout_width="match_parent"
