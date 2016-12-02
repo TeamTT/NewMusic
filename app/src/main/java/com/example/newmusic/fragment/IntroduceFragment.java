@@ -1,14 +1,21 @@
 package com.example.newmusic.fragment;
 
 import android.app.Activity;
+import android.app.Notification;
+import android.app.NotificationManager;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.drawable.BitmapDrawable;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Environment;
 import android.os.Handler;
 import android.os.Message;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+
+
+import android.support.v4.app.NotificationCompat;
 import android.text.TextUtils;
 import android.text.format.DateFormat;
 import android.util.Log;
@@ -32,8 +39,16 @@ import com.example.newmusic.model.MvMode;
 
 import org.greenrobot.eventbus.EventBus;
 import org.greenrobot.eventbus.Subscribe;
+import org.xutils.x;
 
+import java.io.File;
+import java.io.FileOutputStream;
+import java.io.IOException;
+import java.io.InputStream;
 import java.io.UnsupportedEncodingException;
+import java.net.HttpURLConnection;
+import java.net.MalformedURLException;
+import java.net.URL;
 import java.net.URLEncoder;
 import java.text.SimpleDateFormat;
 import java.util.Date;
@@ -69,6 +84,7 @@ public class IntroduceFragment extends Fragment implements View.OnClickListener,
     private View mQqZoneShare;
     private View mWechatShare;
     private View mMomentsShare;
+    private NotificationManager manager;
 
 
     // 商户PID 都是以2088开头 阿里巴巴的谐音
@@ -151,7 +167,7 @@ public class IntroduceFragment extends Fragment implements View.OnClickListener,
                 break;
             case R.id.teach_mv_download:
                 Toast.makeText(getContext(), "已添加到下载列表", Toast.LENGTH_SHORT).show();
-//                EventBus.getDefault().postSticky(mvMode);
+                downloadMv();
                 break;
             case R.id.teach_mv_error:
                 sharePopupWindow.dismiss();
@@ -200,20 +216,49 @@ public class IntroduceFragment extends Fragment implements View.OnClickListener,
         }
     }
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        EventBus.getDefault().register(this);
-    }
+    private void downloadMv() {
+        manager = (NotificationManager) getContext().getSystemService(Context.NOTIFICATION_SERVICE);
+        final NotificationCompat.Builder builder = new NotificationCompat.Builder(getContext())
+                .setSmallIcon(R.mipmap.download)
+                .setContentTitle(mvMode.getTitle())
+                .setProgress(100, 0, false)
+                .setContentText("正在下载。。。");
+        manager.notify(100, builder.build());
+        Thread thread = new Thread() {
+            @Override
+            public void run() {
+                try {
+                    URL url = new URL(mvMode.getUrl());
+                    HttpURLConnection connection = (HttpURLConnection) url.openConnection();
 
-    @Override
-    public void onPause() {
-        super.onPause();
-        EventBus.getDefault().unregister(this);
-    }
-    @Subscribe
-    public void onEvent(MvMode mvMode){
-        Log.e(TAG, "onEvent: "+mvMode );
+                    if (connection.getResponseCode() == 200) {
+                        InputStream inputStream = connection.getInputStream();
+                        FileOutputStream outputStream = new FileOutputStream(Environment.getExternalStorageDirectory());
+                        byte buffer[] = new byte[1024 * 8];
+                        int len = 0;
+                        int total = connection.getContentLength();
+                        int current = 0;
+                        while ((len = inputStream.read(buffer)) > 0) {
+                            outputStream.write(buffer, 0, len);
+                            current += len;
+                            int progress = (int) (current * 1.0f / total * 100);
+                            Log.e(TAG, "run: " + progress);
+                            builder.setProgress(100, progress, false);
+                            manager.notify(100, builder.build());
+                        }
+                        builder.setContentText("下载完成");
+                        manager.notify(100, builder.build());
+                    }
+
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+
+
+            }
+        };
+        thread.start();
+
     }
 
     private String getOrderInfo(String subject, String body, String price) {
@@ -337,7 +382,6 @@ public class IntroduceFragment extends Fragment implements View.OnClickListener,
         SinaWeibo.ShareParams sp = new SinaWeibo.ShareParams();
         sp.setText(mvMode.getTitle());
         sp.setImageUrl(mvMode.getImage());
-
         Platform qzone = ShareSDK.getPlatform(SinaWeibo.NAME);
         qzone.setPlatformActionListener(this); // 设置分享事件回调
 // 执行图文分享

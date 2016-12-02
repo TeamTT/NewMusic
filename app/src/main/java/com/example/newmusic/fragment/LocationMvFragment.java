@@ -29,23 +29,6 @@ public class LocationMvFragment extends Fragment{
     private ListView mListView;
     private LocationMvAdapter adapter;
 
-    @Override
-    public void onResume() {
-        super.onResume();
-        EventBus.getDefault().register(this);
-    }
-
-    @Override
-    public void onPause() {
-        super.onPause();
-        EventBus.getDefault().unregister(this);
-    }
-
-    @Subscribe
-    public void onEvent(MvMode mvMode) {
-        Log.e(TAG, "onEvent: " + mvMode);
-    }
-
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
