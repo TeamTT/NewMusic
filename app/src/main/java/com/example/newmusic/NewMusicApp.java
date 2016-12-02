@@ -2,6 +2,7 @@ package com.example.newmusic;
 
 import android.app.Application;
 import android.content.Context;
+import android.content.Intent;
 
 import com.example.newmusic.contants.HttpParams;
 import com.example.newmusic.utils.NetWorkUtil;
@@ -26,8 +27,12 @@ public class NewMusicApp extends Application {
     @Override
     public void onCreate() {
         super.onCreate();
-        x.Ext.setDebug(true);
+
         x.Ext.init(this);
+        x.Ext.setDebug(true);
+
+        Intent intent = new Intent(this, PlayService.class);
+        startService(intent);
 
         context = this;
         // 初始化OkHttpUtil
@@ -84,5 +89,9 @@ public class NewMusicApp extends Application {
     public static String getCacheControl() {
         return NetWorkUtil.isConnected(context) ? "max-age=15" : "only-if-cache,max-stale=" + 2 * 60 * 60;
     }
+
+
+
+
 
 }

@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+              android:orientation="vertical"
+              android:background="#c1a98354"
+              android:layout_width="match_parent"
+              android:layout_height="match_parent">
+
+    <com.example.newmusic.widget.view.impl.LrcView
+        android:id="@+id/activity_music_details_LrcView"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"/>
+
+    <!--<TextView
+        android:id="@+id/textview"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:gravity="center"/>-->
+
+
+</LinearLayout>

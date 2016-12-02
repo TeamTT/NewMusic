@@ -10,6 +10,7 @@ android {
         targetSdkVersion 23
         versionCode 1
         versionName "1.0"
+        testInstrumentationRunner "android.support.test.runner.AndroidJUnitRunner"
     }
     buildTypes {
         release {
@@ -20,7 +21,7 @@ android {
 }
 
 dependencies {
-    compile fileTree(include: ['*.jar'], dir: 'libs')
+    compile fileTree(dir: 'libs', include: ['*.jar'])
     testCompile 'junit:junit:4.12'
     compile 'com.android.support:appcompat-v7:23.4.0'
     compile 'com.zhy:okhttputils:2.6.2'
@@ -30,6 +31,5 @@ dependencies {
     compile 'org.xutils:xutils:3.3.38'
     compile project(':pulltorefresh')
     compile 'com.google.code.gson:gson:2.8.0'
-    compile files('libs/alipaySdk-20160516.jar')
-    compile 'org.greenrobot:eventbus:3.0.0'
+    compile 'com.github.ctiao:DanmakuFlameMaster:0.5.3'
 }
