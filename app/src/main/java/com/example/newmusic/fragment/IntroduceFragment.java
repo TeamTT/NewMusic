@@ -37,8 +37,7 @@ import com.example.newmusic.custom.MyDialog;
 import com.example.newmusic.interfaces.ModeCallBack;
 import com.example.newmusic.model.MvMode;
 
-import org.greenrobot.eventbus.EventBus;
-import org.greenrobot.eventbus.Subscribe;
+
 import org.xutils.x;
 
 import java.io.File;

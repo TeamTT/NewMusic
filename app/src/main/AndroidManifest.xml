@@ -60,7 +60,7 @@
 
         <activity android:name=".MvSearchActivity"/>
         <activity android:name=".LoginActivity"/>
-        <activity android:name=".MvActivity"/>
+        <activity android:name=".MvActivity" android:configChanges="keyboardHidden|orientation|screenSize"/>
         <activity
             android:name=".wxapi.WXEntryActivity"
             android:configChanges="keyboardHidden|orientation|screenSize"
