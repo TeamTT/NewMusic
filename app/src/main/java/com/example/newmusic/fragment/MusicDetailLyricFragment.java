@@ -94,66 +94,69 @@ public class MusicDetailLyricFragment extends BaseFragment {
 
     private void steupView(int position) {
         Log.e(TAG, "steupView: " + MusicDetailsActivity.data.get(position).getLrc());
-        OkHttpUtils.get()
-                .url(MusicDetailsActivity.data.get(position).getLrc())
-                .addParams(HttpParams.CACHE_CONTROL, NewMusicApp.getCacheControl())
-                .build()
-                .execute(new FileCallBack(getActivity().getCacheDir().getAbsolutePath(), Math.random() * 10000 + "") {
-                    @Override
-                    public void onError(Call call, Exception e, int id) {
-                        Log.e(TAG, "onError: " + e.getMessage());
-                        Log.e(TAG, "onError: " + e.getCause());
-
-                        DefaultLrcBuilder lrcBuilder = new DefaultLrcBuilder();
-
-                        List<LrcRow> lrcRows = lrcBuilder.getLrcRows("暂无歌词");
-
-                        mLrcView.setLrc(lrcRows);
-                    }
-
-                    @Override
-                    public void onResponse(File response, int id) {
-                        try {
-
-                            Log.e(TAG, "onResponse: " + response);
-
-                            FileInputStream inputStream = new FileInputStream(response);
-
-                            ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
-
-                            byte[] buffer = new byte[1024];
-
-                            int len = 0;
-
-                            while ((len = inputStream.read(buffer)) > 0) {
-
-                                arrayOutputStream.write(buffer, 0, len);
-
-                                arrayOutputStream.flush();
-
-                            }
-
-                            inputStream.close();
-
-                            //mTextView.setText(arrayOutputStream.toString("GB2312"));
+        if (MusicDetailsActivity.data.get(position).getLrc() != null && !"".equals((MusicDetailsActivity.data.get(position).getLrc()))) {
+            OkHttpUtils.get()
+                    .url(MusicDetailsActivity.data.get(position).getLrc())
+                    .addParams(HttpParams.CACHE_CONTROL, NewMusicApp.getCacheControl())
+                    .build()
+                    .execute(new FileCallBack(getActivity().getCacheDir().getAbsolutePath(), Math.random() * 10000 + "") {
+                        @Override
+                        public void onError(Call call, Exception e, int id) {
+                            Log.e(TAG, "onError: " + e.getMessage());
+                            Log.e(TAG, "onError: " + e.getCause());
 
                             DefaultLrcBuilder lrcBuilder = new DefaultLrcBuilder();
 
-                            List<LrcRow> lrcRows = lrcBuilder.getLrcRows(arrayOutputStream.toString("GB2312"));
-
-                            Log.e(TAG, "onResponse: " + lrcRows);
+                            List<LrcRow> lrcRows = lrcBuilder.getLrcRows("暂无歌词");
 
                             mLrcView.setLrc(lrcRows);
-
-                            isDown = true;
-
-                            arrayOutputStream.close();
-
-                        } catch (IOException e) {
-                            e.printStackTrace();
                         }
-                    }
-                });
+
+                        @Override
+                        public void onResponse(File response, int id) {
+                            try {
+
+                                Log.e(TAG, "onResponse: " + response);
+
+                                FileInputStream inputStream = new FileInputStream(response);
+
+                                ByteArrayOutputStream arrayOutputStream = new ByteArrayOutputStream();
+
+                                byte[] buffer = new byte[1024];
+
+                                int len = 0;
+
+                                while ((len = inputStream.read(buffer)) > 0) {
+
+                                    arrayOutputStream.write(buffer, 0, len);
+
+                                    arrayOutputStream.flush();
+
+                                }
+
+                                inputStream.close();
+
+                                //mTextView.setText(arrayOutputStream.toString("GB2312"));
+
+                                DefaultLrcBuilder lrcBuilder = new DefaultLrcBuilder();
+
+                                List<LrcRow> lrcRows = lrcBuilder.getLrcRows(arrayOutputStream.toString("GB2312"));
+
+                                Log.e(TAG, "onResponse: " + lrcRows);
+
+                                mLrcView.setLrc(lrcRows);
+
+                                isDown = true;
+
+                                arrayOutputStream.close();
+
+                            } catch (IOException e) {
+                                e.printStackTrace();
+                            }
+                        }
+                    });
+        }
+
     }
 
     private void initView() {

@@ -18,6 +18,7 @@ import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.newmusic.LoginActivity;
 import com.example.newmusic.MusicDetailsActivity;
 import com.example.newmusic.NewMusicApp;
 import com.example.newmusic.PlayService;
@@ -97,8 +98,7 @@ public class RadioFragment extends BaseFragment implements PullToRefreshBase.OnR
             }
         }
     };
-
-
+    private View mLogin;
 
 
     @Override
@@ -113,7 +113,6 @@ public class RadioFragment extends BaseFragment implements PullToRefreshBase.OnR
         getKey();
 
     }
-
 
 
     @Override
@@ -260,6 +259,7 @@ public class RadioFragment extends BaseFragment implements PullToRefreshBase.OnR
         mPlay = ((ImageView) layout.findViewById(R.id.fragment_radio_image_play));
         mNext = ((ImageView) layout.findViewById(R.id.fragment_radio_image_next));
         mLinearLayout = ((LinearLayout) layout.findViewById(R.id.fragment_radio_LinearLayout));
+        mLogin = layout.findViewById(R.id.fragment_radio_login);
 
         mSearch = ((ImageView) layout.findViewById(R.id.fragment_radio_search));
         mEdittext = (EditText) layout.findViewById(R.id.fragment_radio_EditText);
@@ -277,6 +277,7 @@ public class RadioFragment extends BaseFragment implements PullToRefreshBase.OnR
         mTitle.setOnClickListener(this);
         mSingler.setOnClickListener(this);
         mImageView.setOnClickListener(this);
+        mLogin.setOnClickListener(this);
 
         mLinearLayout.setVisibility(View.GONE);
 
@@ -312,7 +313,7 @@ public class RadioFragment extends BaseFragment implements PullToRefreshBase.OnR
                 String s2 = "/" + (Integer.parseInt(lrc) % 100) + "/";
                 String s3 = lrc + ".xml";
                 lrc = s1 + s2 + s3;
-                Log.e(TAG, "getDetail: "+lrc );
+                Log.e(TAG, "getDetail: " + lrc);
             }
 
             if (i == 20) {
@@ -418,6 +419,31 @@ public class RadioFragment extends BaseFragment implements PullToRefreshBase.OnR
 
             case R.id.fragment_radio_image_next:
                 next(position);
+
+                if (playService != null && playService.isplay()) {
+
+                    int position = playService.getCurrentIndex();
+
+                    if (dataforadd.size() != 0) {
+
+                        Log.e(TAG, "change: " + position);
+
+                        RadioDetailModel detailModel = dataforadd.get(position);
+
+                        x.image().bind(mImageView, detailModel.getImg());
+
+                        mTitle.setText(detailModel.getSongName());
+
+                        mSingler.setText(detailModel.getSinglerName());
+                    }
+                }
+
+                if (playService != null && playService.isplay()) {
+                    mPlay.setImageResource(R.mipmap.pause);
+                } else {
+                    mPlay.setImageResource(R.mipmap.play);
+                }
+
                 break;
 
             case R.id.fragment_radio_title:
@@ -440,22 +466,26 @@ public class RadioFragment extends BaseFragment implements PullToRefreshBase.OnR
                 break;
             case R.id.fragment_radio_search:
                 mTv.setVisibility(View.GONE);
+                mLogin.setVisibility(View.GONE);
                 mButton.setVisibility(View.VISIBLE);
                 mEdittext.setVisibility(View.VISIBLE);
                 break;
             case R.id.fragment_radio_Button:
                 String result = mEdittext.getText().toString();
-
                 searchName = result;
-
                 setupView();
 
                 mEdittext.setVisibility(View.GONE);
                 mButton.setVisibility(View.GONE);
+                mLogin.setVisibility(View.VISIBLE);
                 mTv.setVisibility(View.VISIBLE);
 
                 mEdittext.setText("");
 
+                break;
+            case R.id.fragment_radio_login:
+                Intent intent = new Intent(getActivity(), LoginActivity.class);
+                startActivity(intent);
                 break;
         }
     }
@@ -493,8 +523,8 @@ public class RadioFragment extends BaseFragment implements PullToRefreshBase.OnR
                 .execute(new StringCallback() {
                     @Override
                     public void onError(Call call, Exception e, int id) {
-                        Log.e(TAG, "onError: "+e.getMessage() );
-                        Log.e(TAG, "onError: "+e.getCause() );
+                        Log.e(TAG, "onError: " + e.getMessage());
+                        Log.e(TAG, "onError: " + e.getCause());
                     }
 
                     @Override

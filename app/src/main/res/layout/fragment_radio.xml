@@ -8,14 +8,15 @@
         android:layout_width="match_parent"
         android:layout_height="50dp"
         android:orientation="horizontal"
-        android:background="#0e1370">
+        android:gravity="center_vertical"
+        android:background="#0c0343">
 
         <ImageView
             android:id="@+id/fragment_radio_search"
-            android:layout_width="40dp"
-            android:layout_height="40dp"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
             android:layout_margin="5dp"
-            android:src="@android:drawable/ic_menu_search"/>
+            android:src="@mipmap/search"/>
 
         <EditText
             android:id="@+id/fragment_radio_EditText"
@@ -23,7 +24,7 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:layout_margin="8dp"
-            android:hint="请输入要查找的歌曲"
+            android:hint="请输入要查找的歌手"
             android:background="#fff"/>
 
         <Button
@@ -31,6 +32,9 @@
             android:layout_width="wrap_content"
             android:layout_height="match_parent"
             android:onClick="search"
+            android:background="#0c0343"
+            android:layout_margin="5dp"
+            android:textColor="#fff"
             android:text="确定"/>
 
         <TextView
@@ -39,9 +43,17 @@
             android:layout_height="match_parent"
             android:layout_weight="1"
             android:textColor="#fff"
-            android:textSize="23sp"
+            android:textSize="20sp"
             android:gravity="center"
             android:text="电台"/>
+
+        <ImageView
+            android:id="@+id/fragment_radio_login"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_margin="5dp"
+            android:src="@mipmap/login1"/>
+
 
     </LinearLayout>
 

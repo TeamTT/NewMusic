@@ -7,9 +7,9 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.TextView;
 
-import com.coding.codingkeplayer.R;
-import com.coding.codingkeplayer.utils.medieUtils;
-import com.coding.codingkeplayer.vo.Mp3Info;
+import com.example.newmusic.R;
+import com.example.newmusic.model.Mp3Info;
+import com.example.newmusic.utils.medieUtils;
 
 import java.util.ArrayList;
 

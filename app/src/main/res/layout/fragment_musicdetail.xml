@@ -52,6 +52,7 @@
             android:layout_height="match_parent"
             android:layout_margin="10dp"
             android:scaleType="fitXY"
+            android:src="@mipmap/music_album"
             />
 
         <master.flame.danmaku.ui.widget.DanmakuView

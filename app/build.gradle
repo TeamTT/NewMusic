@@ -31,5 +31,6 @@ dependencies {
     compile 'org.xutils:xutils:3.3.38'
     compile project(':pulltorefresh')
     compile 'com.google.code.gson:gson:2.8.0'
+    compile 'org.greenrobot:eventbus:3.0.0'
     compile 'com.github.ctiao:DanmakuFlameMaster:0.5.3'
 }

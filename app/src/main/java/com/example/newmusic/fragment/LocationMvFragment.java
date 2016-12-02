@@ -1,6 +1,5 @@
 package com.example.newmusic.fragment;
 
-import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -12,7 +11,6 @@ import android.widget.ListView;
 
 import com.example.newmusic.R;
 import com.example.newmusic.adapters.LocationMvAdapter;
-import com.example.newmusic.interfaces.ModeCallBack;
 import com.example.newmusic.model.MvMode;
 
 import org.greenrobot.eventbus.EventBus;

@@ -10,8 +10,8 @@ import android.net.Uri;
 import android.os.ParcelFileDescriptor;
 import android.provider.MediaStore;
 
-import com.coding.codingkeplayer.R;
-import com.coding.codingkeplayer.vo.Mp3Info;
+import com.example.newmusic.R;
+import com.example.newmusic.model.Mp3Info;
 
 import java.io.FileDescriptor;
 import java.io.FileNotFoundException;
@@ -105,7 +105,7 @@ public class medieUtils {
      * @return
      */
     public static ArrayList<Mp3Info> getMp3Infos(Context context) {
-      //  Log.d("MedisUtil", MediaStore.Audio.Media.EXTERNAL_CONTENT_URI + "");
+        //  Log.d("MedisUtil", MediaStore.Audio.Media.EXTERNAL_CONTENT_URI + "");
         Cursor cursor = context.getContentResolver().query(
                 MediaStore.Audio.Media.EXTERNAL_CONTENT_URI,
                 null,
@@ -167,6 +167,7 @@ public class medieUtils {
         }
         return min + ":" + sec.trim().substring(0, 2);
     }
+
     /**
      * 获取默认专辑的图片
      *
@@ -174,12 +175,12 @@ public class medieUtils {
      * @param small
      * @return
      */
-   public static Bitmap getDefaultArtwork(Context context, boolean small) {
+    public static Bitmap getDefaultArtwork(Context context, boolean small) {
         BitmapFactory.Options opts = new BitmapFactory.Options();
         opts.inPreferredConfig = Bitmap.Config.RGB_565;
         if (small) {
             return BitmapFactory.decodeStream(context.getResources().
-                    openRawResource(R.mipmap.music_album),null,opts);
+                    openRawResource(R.mipmap.music_album), null, opts);
         }
         return BitmapFactory.decodeStream(context.getResources()
                 .openRawResource(R.mipmap.music_album), null, opts);
@@ -293,11 +294,11 @@ public class medieUtils {
                     if (bm.getConfig() == null) {
                         bm = bm.copy(Bitmap.Config.RGB_565, false);
                         if (bm == null && allowdefault) {
-                             return getDefaultArtwork(context, small);
+                            return getDefaultArtwork(context, small);
                         }
                     }
                 } else if (allowdefault) {
-                      bm = getDefaultArtwork(context, small);
+                    bm = getDefaultArtwork(context, small);
                 }
                 return bm;
             } finally {
