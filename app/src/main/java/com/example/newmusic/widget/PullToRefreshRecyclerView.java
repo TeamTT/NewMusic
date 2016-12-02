@@ -49,10 +49,10 @@ public class PullToRefreshRecyclerView extends PullToRefreshBase<RecyclerView> {
 
         View childAt = refreshableView.getChildAt(childCount - 1);
 
-        int bottom =0;
+        int bottom = 0;
 
         if (childAt != null) {
-            bottom=childAt.getBottom();
+            bottom = childAt.getBottom();
 
             RecyclerView.LayoutParams layoutParams = (RecyclerView.LayoutParams) childAt.getLayoutParams();
 
@@ -60,7 +60,11 @@ public class PullToRefreshRecyclerView extends PullToRefreshBase<RecyclerView> {
 
             int paddingBottom = refreshableView.getPaddingBottom();
 
-            return height==bottom+bottomMargin+paddingBottom;
+            int childAdapterPosition = refreshableView.getChildAdapterPosition(childAt);
+
+            int itemCount = refreshableView.getAdapter().getItemCount();
+
+            return childAdapterPosition + 1 == itemCount && height == bottom + bottomMargin + paddingBottom;
         }
 
         return false;
@@ -84,7 +88,10 @@ public class PullToRefreshRecyclerView extends PullToRefreshBase<RecyclerView> {
 
             int paddingTop = refreshableView.getPaddingTop();
 
-            return top==topMargin+paddingTop;
+            int childAdapterPosition = refreshableView.getChildAdapterPosition(childAt);
+
+
+            return childAdapterPosition == 0 && top == topMargin + paddingTop;
         }
 
         return false;

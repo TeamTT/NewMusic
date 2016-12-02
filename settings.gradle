@@ -1,1 +1,2 @@
-include ':app', ':pulltorefresh'
+include ':app', ':pulltorefresh', ':lrcmodel', ':DanmuTest'
+include ':lyric'
