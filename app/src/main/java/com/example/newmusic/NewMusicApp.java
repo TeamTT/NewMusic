@@ -80,7 +80,6 @@ public class NewMusicApp extends Application {
                 .cache(cache)
                 // 添加一个自定义的网络拦截器
                 .addNetworkInterceptor(cacheInterceptor)
-
                 .build();
         OkHttpUtils.initClient(client);
 
@@ -89,9 +88,6 @@ public class NewMusicApp extends Application {
     public static String getCacheControl() {
         return NetWorkUtil.isConnected(context) ? "max-age=15" : "only-if-cache,max-stale=" + 2 * 60 * 60;
     }
-
-
-
 
 
 }

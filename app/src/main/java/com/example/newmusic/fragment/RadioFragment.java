@@ -181,7 +181,7 @@ public class RadioFragment extends BaseFragment implements PullToRefreshBase.OnR
     private void setupView() {
         OkHttpUtils.get()
                 .url(GET_URL1 + page + GET_URL2 + searchName)
-                .addParams(HttpParams.CACHE_CONTROL, NewMusicApp.getCacheControl())
+                .addHeader(HttpParams.CACHE_CONTROL,NewMusicApp.getCacheControl())
                 .build()
                 .execute(new StringCallback() {
                     @Override
@@ -189,7 +189,6 @@ public class RadioFragment extends BaseFragment implements PullToRefreshBase.OnR
                         Log.e(TAG, "onError: " + e.getMessage());
                         Log.e(TAG, "onError: " + e.getCause());
                     }
-
                     @Override
                     public void onResponse(String response, int id) {
                         Log.e(TAG, "onResponse: " + response);

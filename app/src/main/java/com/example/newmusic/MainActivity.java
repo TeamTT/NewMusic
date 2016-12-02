@@ -5,13 +5,17 @@ import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentManager;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.KeyEvent;
 import android.widget.RadioGroup;
+import android.widget.Toast;
 
 import com.example.newmusic.fragment.LocalFragment;
 import com.example.newmusic.fragment.MvFragment;
 import com.example.newmusic.fragment.RadioFragment;
 
 import java.lang.reflect.InvocationTargetException;
+import java.util.Timer;
+import java.util.TimerTask;
 
 public class MainActivity extends AppCompatActivity implements RadioGroup.OnCheckedChangeListener {
 
@@ -20,6 +24,7 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
     private FragmentTransaction transaction;
     private Fragment showfragment;
     private FragmentManager fm;
+    private boolean isExit = false;
 
 
     @Override
@@ -104,4 +109,23 @@ public class MainActivity extends AppCompatActivity implements RadioGroup.OnChec
         transaction.commit();
     }
 
+    @Override
+    public boolean onKeyDown(int keyCode, KeyEvent event) {
+        if (!isExit) {
+            // 修改标记位
+            isExit = true;
+            Toast.makeText(MainActivity.this, "再按一次退出", Toast.LENGTH_SHORT).show();
+            // 调用定时器的定时任务      ① 具体的任务  ② 延迟时间
+            new Timer().schedule(new TimerTask() {
+                @Override
+                public void run() {
+                    // 还原状态
+                    isExit = false;
+                }
+            }, 3 * 1000);
+            return true;
+        }
+        return super.onKeyDown(keyCode, event);
+
+    }
 }
