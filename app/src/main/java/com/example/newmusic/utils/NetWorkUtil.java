@@ -14,5 +14,4 @@ public class NetWorkUtil {
         return networkInfo != null && networkInfo.isAvailable();
     }
 
-
 }

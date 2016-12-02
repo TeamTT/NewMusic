@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="utf-8"?>
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical">
+
+    <ImageView
+        android:id="@+id/mv_comment_item_image"
+        android:layout_width="@dimen/mv_header_height"
+        android:layout_height="@dimen/mv_header_height"
+        android:layout_margin="8dp"
+        android:src="@mipmap/ic_launcher" />
+
+    <TextView
+        android:id="@+id/mv_comment_item_name"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_margin="8dp"
+        android:layout_toRightOf="@id/mv_comment_item_image"
+        android:text="name" />
+
+    <TextView
+        android:id="@+id/mv_comment_item_content"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/mv_comment_item_name"
+        android:layout_margin="8dp"
+        android:layout_toRightOf="@id/mv_comment_item_image"
+        android:text="content"
+        android:textStyle="bold" />
+
+    <TextView
+        android:id="@+id/mv_comment_item_date"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_alignParentRight="true"
+        android:layout_margin="8dp"
+        android:text="2016-11-29" />
+</RelativeLayout>
